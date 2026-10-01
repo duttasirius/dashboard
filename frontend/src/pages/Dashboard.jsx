@@ -35,8 +35,16 @@ export default function Dashboard(){
 
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
       <StatCard icon={WalletCards} label="Monthly payroll" value={money(stats.monthlyPayroll)} sub={`${money(stats.paidPayroll)} paid · ${money(stats.pendingPayroll)} pending · ${stats.payrollMonth}`} iconClass="bg-emerald-50 text-emerald-600"/>
-      <StatCard icon={CreditCard} label="Payment records" value={stats.paymentCount??recentPayments.length} sub="Razorpay salary records" iconClass="bg-indigo-50 text-indigo-600"/>
-      <div className="card p-5"><p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Quick actions</p><div className="mt-3 flex flex-wrap gap-2">{user?.role==="admin"&&<Link className="btn-primary" to="/employees">Add / Pay employee</Link>}{user?.role==="admin"&&<Link className="btn-secondary" to="/students">Add student</Link>}{user?.role==="admin"&&<Link className="btn-secondary" to="/schools">Add school</Link>}{user?.role==="admin"&&<Link className="btn-secondary" to="/courses">Add course</Link>}</div></div>
+      <StatCard icon={CreditCard} label="Payment records" value={stats.paymentCount||0} sub="Salary payment records" iconClass="bg-indigo-50 text-indigo-600"/>
+      <div className="card p-5">
+        <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Quick actions</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {user?.role==="admin"&&<Link className="btn-primary" to="/employees">Add / Pay employee</Link>}
+          {user?.role==="admin"&&<Link className="btn-secondary" to="/students">Add student</Link>}
+          {user?.role==="admin"&&<Link className="btn-secondary" to="/schools">Add school</Link>}
+          {user?.role==="admin"&&<Link className="btn-secondary" to="/courses">Add course</Link>}
+        </div>
+      </div>
     </div>
 
     <div className="grid gap-5 xl:grid-cols-[1.2fr_.8fr]">
@@ -45,15 +53,22 @@ export default function Dashboard(){
         <div className="divide-y divide-slate-100">
           {latestEmployees.map((e,i)=><motion.div key={e._id} initial={{opacity:0,x:-5}} animate={{opacity:1,x:0}} transition={{delay:i*.03}} className="flex items-center justify-between gap-4 px-5 py-4">
             <div className="flex min-w-0 items-center gap-3"><Avatar name={e.name}/><div><p className="truncate text-sm font-bold">{e.name}</p><p className="truncate text-xs text-slate-500">{e.position} · {e.department}</p></div></div>
-            <div className="flex items-center gap-3"><div className="text-right"><p className="text-sm font-semibold">{money(e.salary)}</p><span className={`badge ${status(e.status)}`}>{e.status}</span></div>{user?.role==="admin"&&<button className="btn-secondary px-3 py-2 text-emerald-700" onClick={()=>setPayEmployee(e)}><CreditCard size={15}/> Pay</button>}</div>
+            <div className="flex items-center gap-3">
+              <div className="text-right"><p className="text-sm font-semibold">{money(e.salary)}</p><span className={`badge ${status(e.status)}`}>{e.status}</span></div>
+              {user?.role==="admin"&&<button className="btn-secondary px-3 py-2 text-emerald-700" onClick={()=>setPayEmployee(e)}><CreditCard size={15}/> Pay</button>}
+            </div>
           </motion.div>)}
           {!latestEmployees.length&&<p className="p-6 text-sm text-slate-500">No employees yet.</p>}
         </div>
       </section>
+
       <section className="card overflow-hidden">
         <Head icon={CreditCard} title="Recent payments" href="/payments"/>
         <div className="divide-y divide-slate-100">
-          {recentPayments.map(p=><div className="flex items-center justify-between gap-3 px-5 py-4" key={p._id}><div className="min-w-0"><p className="truncate text-sm font-bold">{p.employee?.name||"Unknown"}</p><p className="text-xs text-slate-500">{p.month} · {dateText(p.paidAt||p.createdAt)}</p></div><div className="text-right"><p className="text-sm font-semibold">{money(p.amount)}</p><span className={`badge ${status(p.status)}`}>{p.status}</span></div></div>)}
+          {recentPayments.map(p=><div className="flex items-center justify-between gap-3 px-5 py-4" key={p._id}>
+            <div className="min-w-0"><p className="truncate text-sm font-bold">{p.employee?.name||"Unknown"}</p><p className="text-xs text-slate-500">{p.month} · {dateText(p.paidAt||p.createdAt)}</p></div>
+            <div className="text-right"><p className="text-sm font-semibold">{money(p.amount)}</p><span className={`badge ${status(p.status)}`}>{p.status}</span></div>
+          </div>)}
           {!recentPayments.length&&<p className="p-6 text-sm text-slate-500">No payments yet.</p>}
         </div>
       </section>
