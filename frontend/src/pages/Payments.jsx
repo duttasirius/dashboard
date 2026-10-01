@@ -34,9 +34,13 @@ export default function Payments() {
         title="Salary payments"
         description="Track Razorpay orders, verified payments and payroll history."
         action={
-          user?.role === "admin" && (
+          user?.role === "admin" ? (
             <button className="btn-primary" onClick={() => setChooseOpen(true)}>
               <WalletCards size={16} /> Pay salary
+            </button>
+          ) : (
+            <button className="btn-secondary" disabled title="Admin permission required">
+              <LockKeyhole size={16} /> Pay salary
             </button>
           )
         }
