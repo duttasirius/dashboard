@@ -22,7 +22,7 @@ export default function Dashboard(){
       <p className="text-[11px] font-bold uppercase tracking-[.22em] text-indigo-600">Overview</p>
       <div className="mt-1 flex flex-col justify-between gap-3 md:flex-row md:items-end">
         <div><h1 className="text-3xl font-black tracking-tight text-slate-950">Good to see you 👋</h1><p className="mt-1 text-sm text-slate-500">A live snapshot of your organization.</p></div>
-        {user?.role==="admin"&&<Link to="/payments" className="btn-primary"><CreditCard size={17}/> Payments</Link>}
+        {<Link to="/payments" className="btn-primary"><CreditCard size={17}/> Payments</Link>}
       </div>
     </motion.div>
 
@@ -39,10 +39,10 @@ export default function Dashboard(){
       <div className="card p-5">
         <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Quick actions</p>
         <div className="mt-3 flex flex-wrap gap-2">
-          {user?.role==="admin"&&<Link className="btn-primary" to="/employees">Add / Pay employee</Link>}
-          {user?.role==="admin"&&<Link className="btn-secondary" to="/students">Add student</Link>}
-          {user?.role==="admin"&&<Link className="btn-secondary" to="/schools">Add school</Link>}
-          {user?.role==="admin"&&<Link className="btn-secondary" to="/courses">Add course</Link>}
+          {<Link className="btn-primary" to="/employees">Add / Pay employee</Link>}
+          {<Link className="btn-secondary" to="/students">Add student</Link>}
+          {<Link className="btn-secondary" to="/schools">Add school</Link>}
+          {<Link className="btn-secondary" to="/courses">Add course</Link>}
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@ export default function Dashboard(){
             <div className="flex min-w-0 items-center gap-3"><Avatar name={e.name}/><div><p className="truncate text-sm font-bold">{e.name}</p><p className="truncate text-xs text-slate-500">{e.position} · {e.department}</p></div></div>
             <div className="flex items-center gap-3">
               <div className="text-right"><p className="text-sm font-semibold">{money(e.salary)}</p><span className={`badge ${status(e.status)}`}>{e.status}</span></div>
-              {user?.role==="admin"&&<button className="btn-secondary px-3 py-2 text-emerald-700" onClick={()=>setPayEmployee(e)}><CreditCard size={15}/> Pay</button>}
+              {<button className="btn-secondary px-3 py-2 text-emerald-700" onClick={()=>setPayEmployee(e)}><CreditCard size={15}/> Pay</button>}
             </div>
           </motion.div>)}
           {!latestEmployees.length&&<p className="p-6 text-sm text-slate-500">No employees yet.</p>}
