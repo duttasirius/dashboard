@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, Clock3, CreditCard, LockKeyhole, Search, XCircle, WalletCards } from "lucide-react";
+import { CheckCircle2, Clock3, CreditCard, Search, XCircle, WalletCards } from "lucide-react";
 import { motion } from "framer-motion";
 import { useGetPaymentsQuery, useGetEmployeesQuery } from "../store/api";
 import PaySalaryModal from "../components/PaySalaryModal";
@@ -34,15 +34,9 @@ export default function Payments() {
         title="Salary payments"
         description="Track Razorpay orders, verified payments and payroll history."
         action={
-          user?.role === "admin" ? (
-            <button className="btn-primary" onClick={() => setChooseOpen(true)}>
-              <WalletCards size={16} /> Pay salary
-            </button>
-          ) : (
-            <button className="btn-secondary" disabled title="Admin permission required">
-              <LockKeyhole size={16} /> Pay salary
-            </button>
-          )
+          <button className="btn-primary" onClick={() => setChooseOpen(true)}>
+            <WalletCards size={16} /> Pay salary
+          </button>
         }
       />
 
@@ -139,7 +133,7 @@ export default function Payments() {
                       {dateText(p.paidAt || p.createdAt)}
                     </td>
                     <td className="px-5 py-4 text-right">
-                      {user?.role === "admin" && p.status !== "paid" && p.employee && (
+                      {p.status !== "paid" && p.employee && (
                         <button
                           className="btn-secondary px-3 py-2 text-emerald-700"
                           onClick={() => {
