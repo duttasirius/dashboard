@@ -55,11 +55,10 @@ RAZORPAY_WEBHOOK_SECRET=...
 
 The backend accepts `MONGO_URL`, `MONGODB_URL`, or `MONGO_URI` for compatibility.
 
-## Roles
-- First registered user = admin
-- Later registered users = staff
-- Admin can manage all modules and make salary payments
-- Managers can manage employees; staff is read-only
+## Access
+- Authentication is required to use the dashboard.
+- Once logged in, every user has full application access.
+- There are no role-based restrictions on employees, students, schools, courses, or salary-payment actions.
 
 ## Razorpay
 The app uses Razorpay Checkout for salary-payment recording. Orders are created server-side and signatures are verified server-side. This is not a bank-to-employee payout service.
@@ -74,12 +73,4 @@ npm run seed
 
 ## Making your existing local account admin
 
-The first account in a fresh database becomes admin. If your existing account currently shows Staff, you can promote that account locally with:
-
-```bash
-cd backend
-npm install
-npm run make-admin -- your-login-email@example.com
-```
-
-Then sign out and sign in again so the updated role is loaded. Admin users can add/edit/delete employees, students, schools and courses and can start salary payments.
+Role labels are retained for compatibility with existing accounts, but they do not restrict dashboard actions.
