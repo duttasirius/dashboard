@@ -1,0 +1,1 @@
+export default function EmptyState({icon:Icon,title,text}){return <div className="grid place-items-center gap-2 p-12 text-center text-slate-500">{Icon&&<Icon size={30}/>}<p className="font-semibold text-slate-700">{title}</p>{text&&<p className="text-sm">{text}</p>}</div>}
