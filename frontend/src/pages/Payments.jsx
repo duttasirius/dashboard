@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, Clock3, CreditCard, Search, XCircle, WalletCards } from "lucide-react";
+import { CheckCircle2, Clock3, CreditCard, LockKeyhole, Search, XCircle, WalletCards } from "lucide-react";
 import { motion } from "framer-motion";
 import { useGetPaymentsQuery, useGetEmployeesQuery } from "../store/api";
 import PaySalaryModal from "../components/PaySalaryModal";
