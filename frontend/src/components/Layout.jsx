@@ -39,7 +39,7 @@ export default function Layout(){
           <div><p className="text-[10px] font-black uppercase tracking-[.23em] text-indigo-600">ERP Pro</p><p className="text-sm font-bold text-slate-900">{current}</p></div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="hidden text-right sm:block"><p className="text-xs font-bold text-slate-800">{user?.name}</p><p className="text-[11px] capitalize text-slate-400">{user?.role}</p></div>
+          <div className="hidden text-right sm:block"><p className="text-xs font-bold text-slate-800">{user?.name}</p><p className="text-[11px] capitalize text-slate-400">Full access</p></div>
           <div className="grid size-9 place-items-center rounded-full bg-indigo-600 text-xs font-black text-white">{user?.name?.slice(0,2).toUpperCase()}</div>
           <button className="icon-btn hidden sm:grid" title="Sign out" onClick={signOut}><LogOut size={17}/></button>
         </div>
@@ -61,7 +61,7 @@ function Sidebar({user,signOut,onNavigate}){
       </NavLink>)}
     </nav>
     <div className="mt-auto border-t border-slate-800 py-4">
-      <div className="rounded-xl bg-slate-900 p-3"><p className="truncate text-sm font-semibold">{user?.name}</p><p className="mt-1 text-[11px] capitalize text-slate-400">{user?.role}</p></div>
+      <div className="rounded-xl bg-slate-900 p-3"><p className="truncate text-sm font-semibold">{user?.name}</p><p className="mt-1 text-[11px] text-slate-400">Full access</p></div>
       <button onClick={signOut} className="mt-3 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-slate-300 hover:bg-slate-800"><LogOut size={17}/>Sign out</button>
     </div>
   </div>
