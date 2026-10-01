@@ -5,7 +5,6 @@ import morgan from "morgan";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import employeeRoutes from "./routes/employee.routes.js";
-import productRoutes from "./routes/product.routes.js";
 import schoolRoutes from "./routes/school.routes.js";
 import courseRoutes from "./routes/course.routes.js";
 import studentRoutes from "./routes/student.routes.js";
@@ -29,7 +28,6 @@ app.get("/api/health",(req,res)=>res.json({status:"ok",service:"mern-erp-pro"}))
 
 app.use("/api/auth",authRoutes);
 app.use("/api/employees",employeeRoutes);
-app.use("/api/products",productRoutes);
 app.use("/api/schools",schoolRoutes);
 app.use("/api/courses",courseRoutes);
 app.use("/api/students",studentRoutes);
