@@ -2,14 +2,16 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import { connectDB } from "./config/db.js";
 import Employee from "./models/Employee.js";
-import Product from "./models/Product.js";
 import School from "./models/School.js";
 import Course from "./models/Course.js";
 import Student from "./models/Student.js";
 
 await connectDB();
 await Promise.all([
-  Employee.deleteMany({}),Product.deleteMany({}),School.deleteMany({}),Course.deleteMany({}),Student.deleteMany({})
+  Employee.deleteMany({}),
+  School.deleteMany({}),
+  Course.deleteMany({}),
+  Student.deleteMany({})
 ]);
 
 const schools=await School.insertMany([
@@ -34,12 +36,6 @@ await Employee.insertMany([
   {name:"Arjun Das",employeeId:"EMP003",email:"arjun.emp@example.com",phone:"9876543212",department:"Sales",position:"Sales Executive",salary:32000,status:"active"},
   {name:"Neha Gupta",employeeId:"EMP004",email:"neha.emp@example.com",phone:"9876543213",department:"Marketing",position:"Marketing Specialist",salary:40000,status:"active"},
   {name:"Vikram Singh",employeeId:"EMP005",email:"vikram.emp@example.com",phone:"9876543214",department:"Operations",position:"Operations Executive",salary:35000,status:"inactive"}
-]);
-await Product.insertMany([
-  {name:"Business Laptop",sku:"LAP001",category:"Electronics",price:65000,quantity:12,supplier:"Tech Supplier",lowStockThreshold:3},
-  {name:"Wireless Mouse",sku:"MOU001",category:"Accessories",price:1200,quantity:50,supplier:"Office Supply Co.",lowStockThreshold:10},
-  {name:"Mechanical Keyboard",sku:"KEY001",category:"Accessories",price:2500,quantity:30,supplier:"Office Supply Co.",lowStockThreshold:5},
-  {name:"Office Monitor",sku:"MON001",category:"Electronics",price:18000,quantity:4,supplier:"Display World",lowStockThreshold:5}
 ]);
 
 console.log("ERP demo data inserted.");
