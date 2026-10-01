@@ -70,3 +70,16 @@ Run only against a development database:
 cd backend
 npm run seed
 ```
+
+
+## Making your existing local account admin
+
+The first account in a fresh database becomes admin. If your existing account currently shows Staff, you can promote that account locally with:
+
+```bash
+cd backend
+npm install
+npm run make-admin -- your-login-email@example.com
+```
+
+Then sign out and sign in again so the updated role is loaded. Admin users can add/edit/delete employees, students, schools and courses and can start salary payments.
