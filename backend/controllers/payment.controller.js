@@ -44,7 +44,8 @@ export async function verifyPayment(req,res){
   const {razorpay_order_id,razorpay_payment_id,razorpay_signature}=req.body;
   if(!razorpay_order_id||!razorpay_payment_id||!razorpay_signature)return res.status(400).json({message:"Incomplete Razorpay response."});
   const expected=checkoutSignature(razorpay_order_id,razorpay_payment_id);
-  if(expected!==razorpay_signature){
+  const valid=crypto.timingSafeEqual(Buffer.from(expected),Buffer.from(razorpay_signature));
+  if(!valid){
     await Payment.findOneAndUpdate({orderId:razorpay_order_id},{status:"failed"});
     return res.status(400).json({message:"Payment signature verification failed."});
   }
